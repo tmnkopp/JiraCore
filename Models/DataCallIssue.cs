@@ -16,10 +16,23 @@ namespace JiraCore.Models
         }
         public string Key { get; set; }
         public string Ticket { get; set; }
+        public string Title { get; set; }
+        public string Link { get; set; }
         public string Section { get; set; }
         public string SectionId { get; set; }
         public int SectionNo { get; set; }
+        public string Description { get; set; }
         public List<DataCallMetric> Metrics {get;set;}
+        public string GetDetails  {
+            get {
+                int i = this.Description.IndexOf("DETAILS:");
+                if (i > 0)
+                {
+                    return this.Description.Substring(i, this.Description.Length - i);
+                }
+                return this.Description;
+            } 
+        }
     }
   
 }

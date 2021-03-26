@@ -11,6 +11,6 @@ namespace JiraCore.Models
         public string IDText { get; set; }
         public string MetricText { get; set; }
         public string MetricPicklist { get; set;  }
-        public List<Picklist> PickLists { get; set; }
+        public List<PickList> PickLists { get; set; }
     }
 }

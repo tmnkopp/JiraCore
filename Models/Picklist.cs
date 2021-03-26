@@ -4,10 +4,11 @@ using System.Text;
 
 namespace JiraCore.Models
 {
-    public class Picklist
+    public class PickList
     {
-        public string PicklistID { get; set; }
-        public string TypeID { get; set; }
-        public string Name { get; set; }
+        public string PK_PickList { get; set; }
+        public string PK_PickListType { get; set; }
+        public string DisplayValue { get; set; }
+        public string CodeValue { get; set; } 
     }
 }
