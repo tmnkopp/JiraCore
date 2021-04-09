@@ -8,6 +8,49 @@ namespace JiraCore.Data
 {
     public static class IssueProvider
     {
+        public static DataCallIssue LoadFromDescription(string content)
+        { 
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(content);
+            DataCallIssue issue = new DataCallIssue();
+         
+            string desc = xmldoc.SelectSingleNode("//item//description").InnerXml;
+            issue.Description = xmldoc.SelectSingleNode("//item//description").InnerText.Trim();
+
+            if (xmldoc.SelectSingleNode("//qgroup") != null)
+                issue.Section = xmldoc.SelectSingleNode("//qgroup").InnerText.Trim();
+
+            if (xmldoc.SelectSingleNode("//item//title") != null)
+                issue.Title = xmldoc.SelectSingleNode("//item//title").InnerText.Trim();
+
+            if (xmldoc.SelectSingleNode("//item//link") != null)
+                issue.Link = xmldoc.SelectSingleNode("//item//link").InnerText.Trim();
+
+            if (xmldoc.SelectSingleNode("//metric") != null)
+            {
+                foreach (XmlNode xn in xmldoc.SelectNodes("//metric"))
+                {
+                    DataCallMetric metric = new DataCallMetric();
+                    metric.IDText = xn["id-text"].InnerText;
+                    metric.MetricText = xn["question-text"].InnerText;
+                    metric.MetricPicklist = xn["picklist"] == null ? null : $"<picklist>{xn["picklist"].InnerXml}</picklist>";
+                  
+                    issue.Metrics.Add(metric);
+                }
+            } 
+            if (xmldoc.SelectSingleNode("//qgroup") != null)
+                issue.Key = xmldoc.SelectSingleNode("//qgroup").Attributes["id"].Value;
+
+            if (xmldoc.SelectSingleNode("//sectionno") != null)
+            {
+                string sectionno = xmldoc.SelectSingleNode("//sectionno").InnerText;
+                if (!string.IsNullOrWhiteSpace(sectionno))
+                {
+                    issue.SectionNo = Convert.ToInt32(sectionno);
+                }
+            }
+             return issue;
+        }
         public static List<DataCallIssue> Load(string src) {
             List<DataCallIssue> issues = new List<DataCallIssue>();
             int cnt = 0;

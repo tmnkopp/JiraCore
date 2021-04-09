@@ -22,5 +22,14 @@ namespace JiraCore.Models
         public string description { get; set; }
         public string desc { get; set; }
         public string content { get; set; }
+        public bool diff { get; set; }
+        public List<JiraIssueItem> issueitem { get; set; }
+    }
+    public class JiraIssueItem
+    {
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
+        public string metricid { get; set; } 
+        public string metrictext { get; set; } 
     }
 }
