@@ -20,10 +20,10 @@ namespace JiraCore.Models
         public string version { get; set; }
         public string summary { get; set; }
         public string description { get; set; }
-        public string desc { get; set; }
-        public string content { get; set; }
-        public bool diff { get; set; }
-        public List<JiraIssueItem> issueitem { get; set; }
+        public string deschash { get; set; }
+        public string desc  { get; set; }
+        public string content { get; set; } 
+        public List<JiraIssueItem> issueitems { get; set; }
     }
     public class JiraIssueItem
     {
@@ -31,5 +31,6 @@ namespace JiraCore.Models
         public string _id { get; set; }
         public string metricid { get; set; } 
         public string metrictext { get; set; } 
+        public string hash { get; set; } 
     }
 }
