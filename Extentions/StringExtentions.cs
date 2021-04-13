@@ -13,7 +13,7 @@ namespace JiraCore
     { 
         public static string Hash(this string Target)
         { 
-            return Regex.Replace(Target, "[^A-Za-z0-9]", "").Trim() ;
+            return Regex.Replace(Target?? "", "[^A-Za-z0-9]", "").Trim() ;
         }  
         public static string StripHTML(this string Target)
         {

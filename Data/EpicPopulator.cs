@@ -60,7 +60,7 @@ namespace JiraCore
                 string title = doc.SelectSingleNode("//title")?.InnerText.Trim() ?? "";
                 string section = Regex.Replace(title, "\\[.*\\] ", ""); 
                 string description = doc.SelectSingleNode("//description")?.InnerText.Trim() ?? "";
-                
+                string summary = doc.SelectSingleNode("//summary")?.InnerText.Trim();
                 BsonArray issueitems = new BsonArray();
                 foreach (var para in description.Split("<p>"))
                 {
