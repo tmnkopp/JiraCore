@@ -30,7 +30,11 @@ namespace JiraCore.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { get; set; }
         public string metricid { get; set; } 
-        public string metrictext { get; set; } 
+        public string metrictext { get; set; }
+        public string pk { get; set; }
+        public string pkpicklist { get; set; }
+        public string control { get; set; }
+        public string controltype { get; set; }
         public string hash { get; set; } 
     }
 }

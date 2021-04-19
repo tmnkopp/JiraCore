@@ -64,6 +64,7 @@ namespace JiraCore
                 BsonArray issueitems = new BsonArray();
                 foreach (var para in description.Split("<p>"))
                 {
+
                     var m = Regex.Match(para, "(\\d{1,2}\\.\\d{0,2})(.*)</p>");
                     if (m.Groups.Count > 1)
                     {
