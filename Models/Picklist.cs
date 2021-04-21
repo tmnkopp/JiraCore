@@ -24,10 +24,14 @@ namespace JiraCore.Models
         } 
         public Func<string,string> GetCode = (s) =>
            {
-               string code = Regex.Replace(s.ToUpper(), @"[^A-Z]", "");
-               string PRE = code.Substring(0,2); 
-               code = PRE + Regex.Replace(code.Replace(PRE,""), @"[AEIOUY]", "");
-               int len = (code.Length > 6) ? 6 : code.Length;
+               s = s.ToUpper().Trim();
+               if (s == "OTHER") return "OTH";
+               string code = Regex.Replace(s, @"[^A-Z]", "");
+               string PRE = code.Substring(0,2);
+               string POST = code.Substring(code.Length-2, 2);
+               code = code.Replace(PRE, ""); 
+               code = PRE + Regex.Replace(code, @"[AEIOUY]", "") + POST;
+               int len = (code.Length > 8) ? 8 : code.Length;
                return code.Substring(0, len); 
            }; 
     }
