@@ -58,14 +58,14 @@ namespace JiraCore
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(src);
                 string title = doc.SelectSingleNode("//title")?.InnerText.Trim() ?? "";
-                string section = Regex.Replace(title, "\\[.*\\] ", ""); 
+                string section = Regex.Replace(title, $"\\[.*\\] ", ""); 
                 string description = doc.SelectSingleNode("//description")?.InnerText.Trim() ?? "";
                 string summary = doc.SelectSingleNode("//summary")?.InnerText.Trim();
                 BsonArray issueitems = new BsonArray();
                 foreach (var para in description.Split("<p>"))
                 {
 
-                    var m = Regex.Match(para, "(\\d{1,2}\\.\\d{0,2})(.*)</p>");
+                    var m = Regex.Match(para, $"(\\d{1,2}\\.\\d{0,2})(.*)</p>");
                     if (m.Groups.Count > 1)
                     {
                         var metric = m.Groups[1].Value.Trim().TrimEnd('.');
